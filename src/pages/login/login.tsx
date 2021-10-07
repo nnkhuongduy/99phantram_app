@@ -9,7 +9,7 @@ import { useLoginMutation } from 'src/services/auth';
 import { GLOBAL_CONSTANTS } from 'src/constants/global';
 import { selectCurrentUser } from 'src/slices/auth';
 import { useAppSelector } from 'src/hooks/store';
-import { HttpError } from 'src/models/http-error';
+import { useHttpError } from 'src/hooks/http';
 
 const { useForm } = Form;
 
@@ -17,6 +17,7 @@ export const LoginPage: FC = () => {
   const [form] = useForm();
   const [login, { isLoading }] = useLoginMutation();
   const currentUser = useAppSelector(selectCurrentUser);
+  const httpErrorHandler = useHttpError();
 
   const onFinish = async (value: AuthRequest) => {
     try {
@@ -26,11 +27,7 @@ export const LoginPage: FC = () => {
 
       localStorage.setItem(GLOBAL_CONSTANTS.LOCAL_STORE_JWT_TOKEN, token);
     } catch (error: any) {
-      message.error(
-        error.data
-          ? (error.data as HttpError).message
-          : 'Đã xảy ra lỗi trong quá trình đăng nhập! Xin vui lòng thử lại sau.'
-      );
+      httpErrorHandler(error);
     }
   };
 
