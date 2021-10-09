@@ -20,6 +20,10 @@ const authSlice = createSlice({
     setJwtToken: (state, { payload }: PayloadAction<string>) => {
       state.token = payload;
     },
+    logout: (state) => {
+      state.token = undefined;
+      state.identifier = undefined;
+    }
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -38,7 +42,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setJwtToken } = authSlice.actions;
+export const { setJwtToken, logout } = authSlice.actions;
 
 export const selectCurrentUser = (state: RootState) => state.auth.identifier;
 

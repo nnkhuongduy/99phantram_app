@@ -3,9 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import { Spin } from 'antd';
 
 import { PrivateRoute } from './components/private-route/private-route';
+import { Layout } from './components/layout/layout';
 
 import { LoginPage } from './pages/login/login';
 import { HomePage } from './pages/home/home';
+import { NotFoundPage } from './pages/404/404';
 
 import { useLazyAuthenticateQuery } from './services/auth';
 import { GLOBAL_CONSTANTS } from './constants/global';
@@ -55,15 +57,19 @@ function App() {
   }
 
   return (
-    <Switch>
-      <PrivateRoute path="/" exact>
-        <HomePage />
-      </PrivateRoute>
-      <Route path="/login" exact>
-        <LoginPage />
-      </Route>
-      <PrivateRoute path="*"></PrivateRoute>
-    </Switch>
+    <Layout>
+      <Switch>
+        <PrivateRoute path="/" exact>
+          <HomePage />
+        </PrivateRoute>
+        <Route path="/login" exact>
+          <LoginPage />
+        </Route>
+        <PrivateRoute path="*">
+          <NotFoundPage />
+        </PrivateRoute>
+      </Switch>
+    </Layout>
   );
 }
 
