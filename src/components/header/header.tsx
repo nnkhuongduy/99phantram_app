@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { PageHeader, Row, Col, Button, Space, Menu, Dropdown } from 'antd';
+import { PageHeader, Row, Col, Space, Menu, Dropdown, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineLogout } from 'react-icons/ai';
 
-import { HeaderStyled } from './styled';
+import { HeaderStyled, AvatarStyled } from './styled';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
 import { logout, selectCurrentUser } from 'src/slices/auth';
 import { selectHeaderTitle } from 'src/slices/global';
@@ -42,10 +42,9 @@ export const Header: FC = () => {
             <span>{currentUser?.firstName + ' ' + currentUser?.lastName}</span>
             <Dropdown overlay={menu} trigger={['click']}>
               <Button
-                icon={
-                  <AiOutlineUser style={{ width: '20px', height: '22px' }} />
-                }
+                icon={<AvatarStyled user={currentUser!} alt="Avatar" />}
                 shape="circle"
+                style={{ padding: '0' }}
               ></Button>
             </Dropdown>
           </Space>

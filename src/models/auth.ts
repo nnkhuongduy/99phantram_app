@@ -1,4 +1,4 @@
-import { Employee } from './employee';
+import { User } from './user';
 
 export interface AuthRequest {
   username: string;
@@ -7,6 +7,6 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-  identifier: Employee;
+  identifier: User;
   token: string;
 }

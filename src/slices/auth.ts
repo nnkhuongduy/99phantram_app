@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Employee } from 'src/models/employee';
+import { User } from 'src/models/user';
 import { authApi } from 'src/services/auth';
 import { RootState } from './store';
 
 interface AuthState {
-  identifier?: Employee;
+  identifier?: User;
   token?: string;
 }
 

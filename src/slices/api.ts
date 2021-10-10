@@ -9,7 +9,7 @@ export const _99phantramApi = createApi({
       const token = (getState() as RootState).auth.token;
 
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
 
       return headers;
