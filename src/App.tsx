@@ -8,6 +8,7 @@ import { Layout } from './components/layout/layout';
 import { LoginPage } from './pages/login/login';
 import { HomePage } from './pages/home/home';
 import { NotFoundPage } from './pages/404/404';
+import { UsersPage } from './pages/users/users';
 
 import { useLazyAuthenticateQuery } from './services/auth';
 import { GLOBAL_CONSTANTS } from './constants/global';
@@ -61,6 +62,9 @@ function App() {
       <Switch>
         <PrivateRoute path="/" exact>
           <HomePage />
+        </PrivateRoute>
+        <PrivateRoute path="/users" exact>
+          <UsersPage />
         </PrivateRoute>
         <Route path="/login" exact>
           <LoginPage />

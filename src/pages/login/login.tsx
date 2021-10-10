@@ -57,12 +57,17 @@ export const LoginPage: FC = () => {
               requiredMark="optional"
             >
               <Form.Item
-                name="username"
+                name="email"
                 rules={[
-                  { required: true, message: 'Vui lòng nhập tên đăng nhập!' },
+                  { required: true, message: 'Vui lòng nhập email!' },
+                  { type: 'email', message: 'Email không hợp lệ!' },
                 ]}
               >
-                <Input prefix={<AiOutlineUser />} placeholder="Username" />
+                <Input
+                  prefix={<AiOutlineUser />}
+                  placeholder="Email"
+                  type="email"
+                />
               </Form.Item>
               <Form.Item
                 name="password"
