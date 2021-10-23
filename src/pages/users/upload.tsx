@@ -6,6 +6,7 @@ import { UploadFile } from 'antd/lib/upload/interface';
 
 interface UploadAvatarProps {
   file?: UploadFile;
+  defaultUrl?: string;
   onUpload: (file: UploadFile) => void;
 }
 
@@ -27,7 +28,7 @@ const fileChecking = (file: UploadFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-export const UploadAvatar: FC<UploadAvatarProps> = ({ file, onUpload }) => {
+export const UploadAvatar: FC<UploadAvatarProps> = ({ file, defaultUrl, onUpload }) => {
   const [imageUrl, setImageUrl] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -58,9 +59,9 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ file, onUpload }) => {
       beforeUpload={() => false}
       accept="image/*"
     >
-      {imageUrl ? (
+      {(imageUrl || defaultUrl) ? (
         <Avatar
-          src={imageUrl}
+          src={imageUrl || defaultUrl}
           alt="avatar"
           style={{ width: '100%', height: '100%' }}
         />

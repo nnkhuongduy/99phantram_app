@@ -5,11 +5,11 @@ export const roleApi = _99phantramApi.injectEndpoints({
   endpoints: (build) => ({
     getSelectableRoles: build.query<Role[], void>({
       query: () => ({
-        url: '/roles/selectable',
+        url: '/app/roles/selectable',
       }),
     }),
   }),
   overrideExisting: true,
 });
 
-export const { useLazyGetSelectableRolesQuery } = roleApi;
+export const { useGetSelectableRolesQuery } = roleApi;

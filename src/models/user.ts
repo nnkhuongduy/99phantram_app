@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from './role';
 
 export enum OauthProvider {
   Facebook,
@@ -11,24 +11,33 @@ export enum UserStatus {
   ARCHIVED,
 }
 
+export enum Gender {
+  'Nam',
+  'Nữ',
+  'Khác',
+}
+
 export interface User {
   id: string;
   email: string;
   password: string;
   firstName: string;
   lastName: string;
-  sex: number;
+  sex: Gender;
   address?: string;
   phoneNumber?: string;
-  avatar?: {
-    id: string;
-    url: string;
-  };
+  avatar?: string;
   oauth: boolean;
   oauthProvider?: OauthProvider;
   role: Role;
   status: UserStatus;
-  createdAt: string;
+  createdOn: string;
+  modifiedOn: string;
 }
 
-export interface GetUsersRequest {}
+export type UserForm = Omit<
+  User,
+  'id' | 'oauth' | 'oauthProvider' | 'createdAt' | 'role'
+> & {
+  role: string;
+};

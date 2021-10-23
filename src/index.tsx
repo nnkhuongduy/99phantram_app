@@ -10,6 +10,13 @@ import reportWebVitals from './reportWebVitals';
 import { theme } from './theme';
 import { store } from './slices/store';
 
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
+import dayjs from 'dayjs';
+
+dayjs.extend(localizedFormat);
+dayjs.extend(utc);
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
