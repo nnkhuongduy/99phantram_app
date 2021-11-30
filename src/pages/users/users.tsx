@@ -1,7 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { Row, Col, Input, Select, Button, Drawer } from 'antd';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useHistory, Route, Switch, useLocation } from 'react-router-dom';
+import {
+  useHistory,
+  Route,
+  Switch,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 import { useHeaderTitle } from 'src/hooks/header-title';
 import { UsersTable } from './table';
@@ -17,6 +23,8 @@ export const UsersPage: FC = () => {
 
   const history = useHistory();
   const location = useLocation();
+  const {id: userId} = useParams<{ id: string }>();
+  
   const [visible, setVisible] = useState(false);
   const [drawerTitle, setDrawerTitle] = useState<string>();
   const [query, setQuery] = useState<{
@@ -33,6 +41,9 @@ export const UsersPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/users') {
       setVisible(false);
+    } else if (userId) {
+      setVisible(true);
+      setDrawerTitle('Sửa thông tin người dùng');
     }
     //eslint-disable-next-line
   }, [location]);

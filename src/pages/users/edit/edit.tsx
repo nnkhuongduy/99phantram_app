@@ -4,7 +4,7 @@ import { Form, Input, Button, Select, Space, message, Spin } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { useHistory } from 'react-router-dom';
 
-import { UploadAvatar } from '../upload';
+import { UploadImage } from 'src/components/upload/upload';
 import { useGetSelectableRolesQuery } from 'src/services/role';
 import { useGetUserQuery, useUpdateUserMutation } from 'src/services/user';
 import { UserForm } from 'src/models/user';
@@ -29,6 +29,10 @@ export const EditUser = () => {
 
   const onFinish = async (value: UserForm) => {
     try {
+      if (user?.avatar) {
+        value.avatar = user?.avatar;
+      }
+
       if (avatar) {
         const formData = new FormData();
         formData.append('avatar', avatar as any);
@@ -163,7 +167,8 @@ export const EditUser = () => {
           </Form.Item>
 
           <Form.Item label="Ảnh đại diện">
-            <UploadAvatar
+            <UploadImage
+              name="avatar"
               file={avatar}
               defaultUrl={user.avatar}
               onUpload={(file) => setAvatar(file)}

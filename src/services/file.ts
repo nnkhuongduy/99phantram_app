@@ -9,7 +9,14 @@ export const fileApi = _99phantramApi.injectEndpoints({
         body: formData,
       }),
     }),
+    uploadImage: build.mutation<{ url: string }, FormData>({
+      query: (formData) => ({
+        method: 'POST',
+        url: '/file/image',
+        body: formData,
+      }),
+    }),
   }),
 });
 
-export const { useUploadAvatarMutation } = fileApi;
+export const { useUploadAvatarMutation, useUploadImageMutation } = fileApi;

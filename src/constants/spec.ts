@@ -1,0 +1,3 @@
+export const SPEC_CONSTANTS = {
+  SPEC_CACHE_ID: 'SPEC_CACHE_ID',
+};

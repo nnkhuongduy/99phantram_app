@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, Space, message } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { useHistory } from 'react-router-dom';
 
-import { UploadAvatar } from '../upload';
+import { UploadImage } from 'src/components/upload/upload';
 import { useGetSelectableRolesQuery } from 'src/services/role';
 import { UserForm } from 'src/models/user';
 import { useCreateUserMutation } from 'src/services/user';
@@ -16,7 +16,7 @@ export const AddUser: FC = () => {
   const [form] = Form.useForm();
 
   const { data: roles, isFetching } = useGetSelectableRolesQuery();
-  const [createUser, {isLoading}] = useCreateUserMutation();
+  const [createUser, { isLoading }] = useCreateUserMutation();
   const [uploadAvatar] = useUploadAvatarMutation();
 
   const httpErrorHandler = useHttpError();
@@ -150,7 +150,11 @@ export const AddUser: FC = () => {
       </Form.Item>
 
       <Form.Item label="Ảnh đại diện">
-        <UploadAvatar file={avatar} onUpload={(file) => setAvatar(file)} />
+        <UploadImage
+          name="avatar"
+          file={avatar}
+          onUpload={(file) => setAvatar(file)}
+        />
       </Form.Item>
 
       <Form.Item

@@ -1,5 +1,11 @@
-import { AiOutlineUser } from 'react-icons/ai';
-import { MdDashboard } from 'react-icons/md';
+import {
+  AiOutlineUser,
+  AiFillFolder,
+  AiFillEnvironment,
+  AiFillGold,
+  AiOutlineBook,
+} from 'react-icons/ai';
+import { MdDashboard, MdClass } from 'react-icons/md';
 
 interface MenuItem {
   id: string;
@@ -22,6 +28,41 @@ export const MENU_ITEMS: MenuItem[] = [
     title: 'Người dùng',
     Icon: <AiOutlineUser />,
     path: '/users',
+    exact: false,
+  },
+  {
+    id: 'Supplies',
+    title: 'Bài đăng',
+    Icon: <AiOutlineBook />,
+    path: '/supplies',
+    exact: false,
+  },
+  {
+    id: 'Categories',
+    title: 'Danh mục sản phẩm',
+    Icon: <AiFillFolder />,
+    path: '/categories',
+    exact: false,
+  },
+  {
+    id: 'Locations',
+    title: 'Địa điểm',
+    Icon: <AiFillEnvironment />,
+    path: '/locations',
+    exact: false,
+  },
+  {
+    id: 'Service Types',
+    title: 'Loại dịch vụ',
+    Icon: <AiFillGold />,
+    path: '/service-types',
+    exact: false,
+  },
+  {
+    id: 'Service',
+    title: 'Dịch vụ',
+    Icon: <MdClass />,
+    path: '/services',
     exact: false,
   },
 ];

@@ -37,7 +37,7 @@ export interface User {
 
 export type UserForm = Omit<
   User,
-  'id' | 'oauth' | 'oauthProvider' | 'createdAt' | 'role'
+  'id' | 'oauth' | 'oauthProvider' | 'createdOn' | 'role'
 > & {
   role: string;
 };
