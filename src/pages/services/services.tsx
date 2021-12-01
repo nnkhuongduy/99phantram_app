@@ -35,7 +35,7 @@ export const ServicesPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/services') {
       setVisible(false);
-    } else if (serviceId) {
+    } else if (serviceId && serviceId.length === 24) {
       setVisible(true);
       setDrawerTitle('Sửa thông tin dịch vụ');
     }

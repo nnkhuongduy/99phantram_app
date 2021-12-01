@@ -41,7 +41,7 @@ export const UsersPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/users') {
       setVisible(false);
-    } else if (userId) {
+    } else if (userId && userId.length === 24) {
       setVisible(true);
       setDrawerTitle('Sửa thông tin người dùng');
     }

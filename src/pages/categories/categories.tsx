@@ -37,7 +37,7 @@ export const CategoriesPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/categories') {
       setVisible(false);
-    } else if (categoryId) {
+    } else if (categoryId && categoryId.length === 24) {
       setVisible(true);
       setDrawerTitle('Sửa thông tin danh mục');
     }

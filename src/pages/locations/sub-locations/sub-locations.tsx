@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Transfer, Row, Col, Button, message } from 'antd';
+import { Transfer, Row, Col, Button, message, Input } from 'antd';
 import styled from 'styled-components';
 
 import { Location, LocationStatus } from 'src/models/location';
@@ -30,15 +30,16 @@ export const SubLocations = () => {
   });
   const [updateLocation] = useUpdateLocationMutation();
 
-  const [selectableCategories, setSelectableCategories] = useState<Location[]>(
+  const [selectableLocations, setSelectableLocations] = useState<Location[]>(
     []
   );
   const [targetKeys, setTargetKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [query, setQuery] = useState<string>('');
 
   useEffect(() => {
     if (locations && currentLocation) {
-      setSelectableCategories(
+      setSelectableLocations(
         locations.filter(
           (_) =>
             _.id !== locationId &&
@@ -66,6 +67,11 @@ export const SubLocations = () => {
 
   const onSave = async () => {
     try {
+      if (query.length > 0) {
+        alert('Vui lòng để trống input tìm kiếm!');
+        return;
+      }
+
       const { name, locationLevel, status } = currentLocation!;
 
       await updateLocation({
@@ -88,13 +94,25 @@ export const SubLocations = () => {
   return (
     <MainRow gutter={[8, 8]}>
       <Col span={24} style={{ textAlign: 'end' }}>
-        <Button type="primary" onClick={onSave}>
-          Lưu
-        </Button>
+        <Row justify="space-between">
+          <Col>
+            <Input.Search
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </Col>
+          <Col>
+            <Button type="primary" onClick={onSave}>
+              Lưu
+            </Button>
+          </Col>
+        </Row>
       </Col>
       <Col span={24}>
         <Transfer
-          dataSource={selectableCategories}
+          dataSource={selectableLocations.filter((_) =>
+            _.name.toLowerCase().includes(query)
+          )}
           titles={['Có thể chọn', 'Địa điểm con']}
           targetKeys={targetKeys}
           selectedKeys={selectedKeys}

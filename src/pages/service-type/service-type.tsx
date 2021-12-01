@@ -35,7 +35,7 @@ export const ServiceTypesPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/service-types') {
       setVisible(false);
-    } else if (serviceTypeId) {
+    } else if (serviceTypeId && serviceTypeId.length === 24) {
       setVisible(true);
       setDrawerTitle('Sửa thông tin loại dịch vụ');
     }

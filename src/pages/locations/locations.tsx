@@ -36,7 +36,7 @@ export const LocationsPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/locations') {
       setVisible(false);
-    } else if (locationId) {
+    } else if (locationId && locationId.length === 24) {
       setVisible(true);
       setDrawerTitle('Sửa thông tin địa điểm');
     }

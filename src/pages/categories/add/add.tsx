@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, Space, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { UploadFile } from 'antd/lib/upload/interface';
 
-import { CategoryLevel, CategoryPostForm } from 'src/models/category';
+import { CategoryPostForm } from 'src/models/category';
 import { useCreateCategoryMutation } from 'src/services/category';
 import { useHttpError } from 'src/hooks/http';
 import { UploadImage } from 'src/components/upload/upload';
@@ -19,11 +19,10 @@ export const AddCategory: FC = () => {
   const history = useHistory();
 
   const [image, setImage] = useState<UploadFile>();
-  const [categoryLevel, setCategoryLevel] = useState<CategoryLevel>();
 
   const onFinish = async (value: CategoryPostForm) => {
     try {
-      if (image && value.categoryLevel === CategoryLevel.PRIMARY) {
+      if (image) {
         const formData = new FormData();
         formData.append('image', image as any);
 
@@ -76,21 +75,19 @@ export const AddCategory: FC = () => {
         rules={[{ required: true, message: 'Vui lòng chọn cấp danh mục!' }]}
         wrapperCol={{ span: 6 }}
       >
-        <Select onChange={(value) => setCategoryLevel(value as CategoryLevel)}>
+        <Select>
           <Select.Option value={0}>PRIMARY</Select.Option>
           <Select.Option value={1}>SECONDARY</Select.Option>
         </Select>
       </Form.Item>
 
-      {categoryLevel === CategoryLevel.PRIMARY ? (
-        <Form.Item label="Ảnh">
-          <UploadImage
-            name="image"
-            file={image}
-            onUpload={(file) => setImage(file)}
-          />
-        </Form.Item>
-      ) : null}
+      <Form.Item label="Ảnh">
+        <UploadImage
+          name="image"
+          file={image}
+          onUpload={(file) => setImage(file)}
+        />
+      </Form.Item>
 
       <Form.Item
         label="Trạng thái"

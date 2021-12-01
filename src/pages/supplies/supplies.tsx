@@ -43,7 +43,7 @@ export const SuppliesPage: FC = () => {
   useEffect(() => {
     if (location.pathname === '/supplies') {
       setVisible(false);
-    } else if (supplyId) {
+    } else if (supplyId && supplyId.length === 24) {
       setVisible(true);
       setDrawerTitle('Xem thông tin bài đăng');
     }

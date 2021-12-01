@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Input, Button, Select, Space, message, Spin } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +9,7 @@ import {
   useUpdateCategoryMutation,
 } from 'src/services/category';
 import { useHttpError } from 'src/hooks/http';
-import { CategoryLevel, CategoryPutForm } from 'src/models/category';
+import { CategoryPutForm } from 'src/models/category';
 import { UploadImage } from 'src/components/upload/upload';
 import { useUploadImageMutation } from 'src/services/file';
 
@@ -28,13 +28,6 @@ export const EditCategory = () => {
   const [uploadImage] = useUploadImageMutation();
 
   const [image, setImage] = useState<UploadFile>();
-  const [categoryLevel, setCategoryLevel] = useState<CategoryLevel>();
-
-  useEffect(() => {
-    if (category) {
-      setCategoryLevel(category.categoryLevel);
-    }
-  }, [category]);
 
   const onFinish = async (value: CategoryPutForm) => {
     try {
@@ -42,7 +35,7 @@ export const EditCategory = () => {
         value.image = category?.image;
       }
 
-      if (image && value.categoryLevel === CategoryLevel.PRIMARY) {
+      if (image) {
         const formData = new FormData();
         formData.append('image', image as any);
 
@@ -104,24 +97,20 @@ export const EditCategory = () => {
             rules={[{ required: true, message: 'Vui lòng chọn cấp danh mục!' }]}
             wrapperCol={{ span: 6 }}
           >
-            <Select
-              onChange={(value) => setCategoryLevel(value as CategoryLevel)}
-            >
+            <Select>
               <Select.Option value={0}>PRIMARY</Select.Option>
               <Select.Option value={1}>SECONDARY</Select.Option>
             </Select>
           </Form.Item>
 
-          {categoryLevel === CategoryLevel.PRIMARY ? (
-            <Form.Item label="Ảnh">
-              <UploadImage
-                name="image"
-                file={image}
-                onUpload={(file) => setImage(file)}
-                defaultUrl={category.image}
-              />
-            </Form.Item>
-          ) : null}
+          <Form.Item label="Ảnh">
+            <UploadImage
+              name="image"
+              file={image}
+              onUpload={(file) => setImage(file)}
+              defaultUrl={category.image}
+            />
+          </Form.Item>
 
           <Form.Item
             label="Trạng thái"

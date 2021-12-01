@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Transfer, Row, Col, Button, message } from 'antd';
+import { Transfer, Row, Col, Button, message, Input } from 'antd';
 import styled from 'styled-components';
 
 import { Category, CategoryLevel, CategoryStatus } from 'src/models/category';
@@ -35,6 +35,7 @@ export const SubCategories = () => {
   );
   const [targetKeys, setTargetKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [query, setQuery] = useState<string>('');
 
   useEffect(() => {
     if (categories) {
@@ -66,7 +67,13 @@ export const SubCategories = () => {
 
   const onSave = async () => {
     try {
-      const { name, image, categoryLevel, status, specs, slug } = currentCategory!;
+      if (query.length > 0) {
+        alert('Vui lòng để trống input tìm kiếm!');
+        return;
+      }
+
+      const { name, image, categoryLevel, status, specs, slug } =
+        currentCategory!;
 
       await updateCategory({
         id: categoryId,
@@ -91,13 +98,25 @@ export const SubCategories = () => {
   return (
     <MainRow gutter={[8, 8]}>
       <Col span={24} style={{ textAlign: 'end' }}>
-        <Button type="primary" onClick={onSave}>
-          Lưu
-        </Button>
+        <Row justify="space-between">
+          <Col>
+            <Input.Search
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </Col>
+          <Col>
+            <Button type="primary" onClick={onSave}>
+              Lưu
+            </Button>
+          </Col>
+        </Row>
       </Col>
       <Col span={24}>
         <Transfer
-          dataSource={secondaryCategories}
+          dataSource={secondaryCategories.filter((_) =>
+            _.name.toLowerCase().includes(query)
+          )}
           titles={['Có thể chọn', 'Danh mục con']}
           targetKeys={targetKeys}
           selectedKeys={selectedKeys}
