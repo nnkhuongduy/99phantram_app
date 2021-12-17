@@ -18,6 +18,7 @@ export enum Gender {
 }
 
 export interface User {
+  _id?: string;
   id: string;
   email: string;
   password: string;
@@ -31,6 +32,8 @@ export interface User {
   oauthProvider?: OauthProvider;
   role: Role;
   status: UserStatus;
+  createdAt?: string;
+  updatedAt?: string;
   createdOn: string;
   modifiedOn: string;
 }

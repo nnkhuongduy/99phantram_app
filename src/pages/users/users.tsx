@@ -15,6 +15,8 @@ import { AddUser } from './add/add';
 import { EditUser } from './edit/edit';
 import { User } from 'src/models/user';
 import { useGetUsersQuery } from 'src/services/user';
+import { selectUsers } from 'src/slices/user';
+import { useAppSelector } from 'src/hooks/store';
 
 const { Group, Search } = Input;
 
@@ -35,8 +37,9 @@ export const UsersPage: FC = () => {
     query: '',
   });
   const [_users, _setUsers] = useState<User[]>([]);
+  const users = useAppSelector(selectUsers);
 
-  const { data: users, isFetching } = useGetUsersQuery();
+  const { isFetching } = useGetUsersQuery();
 
   useEffect(() => {
     if (location.pathname === '/users') {

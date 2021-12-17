@@ -10,6 +10,8 @@ import { useGetUserQuery, useUpdateUserMutation } from 'src/services/user';
 import { UserForm } from 'src/models/user';
 import { useUploadAvatarMutation } from 'src/services/file';
 import { useHttpError } from 'src/hooks/http';
+import { useAppSelector } from 'src/hooks/store';
+import { selectUser } from 'src/slices/user';
 
 const { useForm } = Form;
 
@@ -23,9 +25,11 @@ export const EditUser = () => {
 
   const { isFetching: isRoleFetching, data: roles } =
     useGetSelectableRolesQuery();
-  const { isFetching: isUserFetching, data: user } = useGetUserQuery(userId);
+  const { isFetching: isUserFetching } = useGetUserQuery(userId);
   const [uploadAvatar] = useUploadAvatarMutation();
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+
+  const user = useAppSelector(selectUser(userId));
 
   const onFinish = async (value: UserForm) => {
     try {
@@ -59,7 +63,7 @@ export const EditUser = () => {
   return (
     <>
       {isUserFetching ? <Spin size="large" /> : null}
-      {user ? (
+      {!isUserFetching && user ? (
         <Form
           scrollToFirstError
           labelCol={{ span: 6 }}
