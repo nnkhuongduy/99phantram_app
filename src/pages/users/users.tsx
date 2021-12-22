@@ -15,8 +15,6 @@ import { AddUser } from './add/add';
 import { EditUser } from './edit/edit';
 import { User } from 'src/models/user';
 import { useGetUsersQuery } from 'src/services/user';
-import { selectUsers } from 'src/slices/user';
-import { useAppSelector } from 'src/hooks/store';
 
 const { Group, Search } = Input;
 
@@ -25,8 +23,8 @@ export const UsersPage: FC = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const {id: userId} = useParams<{ id: string }>();
-  
+  const { id: userId } = useParams<{ id: string }>();
+
   const [visible, setVisible] = useState(false);
   const [drawerTitle, setDrawerTitle] = useState<string>();
   const [query, setQuery] = useState<{
@@ -37,9 +35,8 @@ export const UsersPage: FC = () => {
     query: '',
   });
   const [_users, _setUsers] = useState<User[]>([]);
-  const users = useAppSelector(selectUsers);
 
-  const { isFetching } = useGetUsersQuery();
+  const { data: users, isFetching } = useGetUsersQuery();
 
   useEffect(() => {
     if (location.pathname === '/users') {
@@ -102,12 +99,12 @@ export const UsersPage: FC = () => {
                         setQuery({ ...query, queryType: value })
                       }
                     >
-                      <Select.Option value="name">Tên</Select.Option>
-                      <Select.Option value="email">Email</Select.Option>
-                      <Select.Option value="phoneNumber">SĐT</Select.Option>
+                      <Select.Option value='name'>Tên</Select.Option>
+                      <Select.Option value='email'>Email</Select.Option>
+                      <Select.Option value='phoneNumber'>SĐT</Select.Option>
                     </Select>
                   }
-                  placeholder="Tìm kiếm..."
+                  placeholder='Tìm kiếm...'
                   enterButton
                   value={query.query}
                   onChange={(value) =>
@@ -119,8 +116,8 @@ export const UsersPage: FC = () => {
             </Col>
             <Col>
               <Button
-                type="primary"
-                icon={<AiOutlinePlus className="app-icon" />}
+                type='primary'
+                icon={<AiOutlinePlus className='app-icon' />}
                 onClick={onAdd}
               >
                 Thêm
@@ -135,7 +132,7 @@ export const UsersPage: FC = () => {
       </Row>
       <Drawer
         title={drawerTitle}
-        placement="right"
+        placement='right'
         visible={visible}
         onClose={onClose}
         width={800}
@@ -143,8 +140,8 @@ export const UsersPage: FC = () => {
         maskClosable={false}
       >
         <Switch>
-          <Route path="/users/add" exact component={AddUser} />
-          <Route path="/users/:id" component={EditUser} />
+          <Route path='/users/add' exact component={AddUser} />
+          <Route path='/users/:id' component={EditUser} />
         </Switch>
       </Drawer>
     </>
