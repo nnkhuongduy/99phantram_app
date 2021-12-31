@@ -1,0 +1,4 @@
+export const SERVICE_TYPE_CONSTANTS = {
+  STATUS_COLOR: ['success', 'error'],
+  SERVICE_TYPE_CACHE_ID: 'SERVICE_TYPE_CACHE_ID',
+};

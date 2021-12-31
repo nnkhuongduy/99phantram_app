@@ -7,7 +7,7 @@ export const Avatar: FC<Omit<AvatarProps, 'src'> & { user: User }> = ({
   ...props
 }) => {
   return (
-    <AntAvatar src={user.avatar ? user.avatar.url : null} {...props}>
+    <AntAvatar src={user.avatar ? user.avatar : null} {...props}>
       {user.avatar ? undefined : user.firstName[0]}
     </AntAvatar>
   );

@@ -9,6 +9,11 @@ import { LoginPage } from './pages/login/login';
 import { HomePage } from './pages/home/home';
 import { NotFoundPage } from './pages/404/404';
 import { UsersPage } from './pages/users/users';
+import { CategoriesPage } from './pages/categories/categories';
+import { LocationsPage } from './pages/locations/locations';
+import { ServiceTypesPage } from './pages/service-type/service-type';
+import { ServicesPage } from './pages/services/services';
+import { SuppliesPage } from './pages/supplies/supplies';
 
 import { useLazyAuthenticateQuery } from './services/auth';
 import { GLOBAL_CONSTANTS } from './constants/global';
@@ -65,6 +70,39 @@ function App() {
         </PrivateRoute>
         <PrivateRoute path="/users" exact>
           <UsersPage />
+        </PrivateRoute>
+        <PrivateRoute path="/users/:id">
+          <UsersPage />
+        </PrivateRoute>
+        <PrivateRoute path="/supplies" exact>
+          <SuppliesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/supplies/:id">
+          <SuppliesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/categories" exact>
+          <CategoriesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/categories/:id">
+          <CategoriesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/locations" exact>
+          <LocationsPage />
+        </PrivateRoute>
+        <PrivateRoute path="/locations/:id">
+          <LocationsPage />
+        </PrivateRoute>
+        <PrivateRoute path="/service-types" exact>
+          <ServiceTypesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/service-types/:id">
+          <ServiceTypesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/services" exact>
+          <ServicesPage />
+        </PrivateRoute>
+        <PrivateRoute path="/services/:id">
+          <ServicesPage />
         </PrivateRoute>
         <Route path="/login" exact>
           <LoginPage />

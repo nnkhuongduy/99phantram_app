@@ -6,13 +6,13 @@ export const authApi = _99phantramApi.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<AuthResponse, AuthRequest>({
       query: (request) => ({
-        url: '/auth/login',
+        url: '/app/auth/login',
         method: 'POST',
         body: request,
       }),
     }),
     authenticate: build.query<User, void>({
-      query: () => '/auth',
+      query: () => '/app/auth',
     }),
   }),
 });

@@ -4,8 +4,10 @@ import { AiOutlineLoading, AiOutlinePlus } from 'react-icons/ai';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 
-interface UploadAvatarProps {
+interface UploadImageProps {
+  name: string;
   file?: UploadFile;
+  defaultUrl?: string;
   onUpload: (file: UploadFile) => void;
 }
 
@@ -27,7 +29,12 @@ const fileChecking = (file: UploadFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-export const UploadAvatar: FC<UploadAvatarProps> = ({ file, onUpload }) => {
+export const UploadImage: FC<UploadImageProps> = ({
+  name,
+  file,
+  defaultUrl,
+  onUpload,
+}) => {
   const [imageUrl, setImageUrl] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -51,16 +58,16 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ file, onUpload }) => {
 
   return (
     <Upload
-      name="avatar"
+      name={name}
       listType="picture-card"
       showUploadList={false}
       onChange={onChange}
       beforeUpload={() => false}
       accept="image/*"
     >
-      {imageUrl ? (
+      {imageUrl || defaultUrl ? (
         <Avatar
-          src={imageUrl}
+          src={imageUrl || defaultUrl}
           alt="avatar"
           style={{ width: '100%', height: '100%' }}
         />

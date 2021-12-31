@@ -11,10 +11,10 @@ export const useHttpError = () => {
   const history = useHistory();
 
   return (error: any) => {
-    if (error.data) {
+    if (error.data && error.data.message) {
       message.error((error.data as HttpError).message);
 
-      if ((error.data as HttpError).code === 400 && currentUser) {
+      if ((error.data as HttpError).code === 401 && currentUser) {
         dispatch(logout());
 
         history.push('/login');
@@ -24,7 +24,7 @@ export const useHttpError = () => {
     }
 
     message.error(
-      'Đã xảy ra lỗi trong quá trình đăng nhập! Xin vui lòng thử lại sau.'
+      'Đã xảy ra lỗi! Xin vui lòng thử lại sau.'
     );
   };
 };

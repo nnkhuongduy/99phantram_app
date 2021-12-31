@@ -78,12 +78,12 @@ export const LoginPage: FC = () => {
               >
                 <Input
                   prefix={<AiOutlineLock />}
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   type="password"
                 />
               </Form.Item>
               <Form.Item name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox>Ghi nhớ phiên đăng nhập</Checkbox>
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit" disabled={isLoading}>
